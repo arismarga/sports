@@ -1,3 +1,11 @@
 import '../scss/app.scss';
 
-console.log(sports);
+import axios from "axios";
+
+class Teams {
+    constructor() {
+        this.fetchTeams();
+    }
+}
+
+new Teams();
