@@ -24,6 +24,22 @@ class Teams {
             console.error(error);
         });
     }
+
+    createTeamOptions(response){
+        const teamsSelectField = document.querySelector(".js-select-team");
+
+        for (let team of response.data.data){
+            const teamOption = document.createElement("option");
+            teamOption.innerText = team.full_name;
+            teamsSelectField.appendChild(teamOption);
+            teamOption.dataset.teamId =  team.id;
+        }
+
+        teamsSelectField.addEventListener("change", (e) => {
+            this.selectedTeamId = e.target.options[e.target.options.selectedIndex].dataset.teamId;
+            this.fetchGames();
+        })
+    }
 }
 
 new Teams();
