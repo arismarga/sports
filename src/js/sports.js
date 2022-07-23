@@ -40,6 +40,25 @@ class Teams {
             this.fetchGames();
         })
     }
+
+    fetchGames(){
+        console.log(this.selectedTeamId);
+        const options = {
+            method: 'GET',
+            url: 'https://free-nba.p.rapidapi.com/games',
+            params: {page: '0', per_page: '25', team_ids: [this.selectedTeamId]},
+            headers: {
+              'X-RapidAPI-Key': '54e8d1a6f4mshe9f62bb56442508p1ab909jsne54dd6094676',
+              'X-RapidAPI-Host': 'free-nba.p.rapidapi.com'
+            }
+        };
+
+        axios.request(options).then((response) => {
+            this.createGameList(response);
+        }).catch(function (error) {
+            console.error(error);
+        });
+    }
 }
 
 new Teams();
