@@ -42,7 +42,6 @@ class Teams {
     }
 
     fetchGames(){
-        console.log(this.selectedTeamId);
         const options = {
             method: 'GET',
             url: 'https://free-nba.p.rapidapi.com/games',
@@ -59,6 +58,23 @@ class Teams {
             console.error(error);
         });
     }
+
+    createGameList(response){
+        const teamGameList = document.querySelector(".js-list-games");
+        teamGameList.innerHTML = "";
+
+        for (let game of response.data.data){
+            const teamGame = document.createElement("li");
+            const vs = " vs ";
+            teamGame.classList = "list-group-item";
+            teamGame.innerText = game.home_team.full_name+vs+game.visitor_team.full_name;
+            teamGameList.appendChild(teamGame);
+            //teamOption.dataset.teamId =  game.selectedTeamId;
+        }
+
+ 
+    }
+    
 }
 
 new Teams();
