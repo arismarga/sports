@@ -65,14 +65,16 @@ class Teams {
 
         for (let game of response.data.data){
             const teamGame = document.createElement("li");
+            const buttonShowStats = document.createElement("button");
             const vs = " vs ";
             teamGame.classList = "list-group-item";
             teamGame.innerText = game.home_team.full_name+vs+game.visitor_team.full_name;
+            buttonShowStats.innerText = "Show Stats";
+            buttonShowStats.classList = "btn-stats";
             teamGameList.appendChild(teamGame);
-            //teamOption.dataset.teamId =  game.selectedTeamId;
+            teamGame.appendChild(buttonShowStats);
+            teamGame.dataset.gameId =  game.id;
         }
-
- 
     }
     
 }
