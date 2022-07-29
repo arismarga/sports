@@ -75,6 +75,14 @@ class Teams {
             teamGame.appendChild(buttonShowStats);
             teamGame.dataset.gameId =  game.id;
         }
+
+        const showStatsButtons = document.querySelectorAll(".btn-stats");
+        showStatsButtons.forEach( (button) => {
+            button.addEventListener("click", () => {
+                const gameId = button.parentElement.dataset.gameId;
+                this.fetchStats(gameId);
+            })
+        })
     }
     
 }
