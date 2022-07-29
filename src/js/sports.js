@@ -84,7 +84,30 @@ class Teams {
             })
         })
     }
-    
+
+    fetchStats(gameId){
+        const options = {
+            method: 'GET',
+            url: 'https://free-nba.p.rapidapi.com/stats',
+            params: {page: '0', per_page: '25', game_ids: [gameId]},
+            headers: {
+              'X-RapidAPI-Key': '54e8d1a6f4mshe9f62bb56442508p1ab909jsne54dd6094676',
+              'X-RapidAPI-Host': 'free-nba.p.rapidapi.com'
+            }
+        };
+
+        axios.request(options).then( (response) => {
+            this.showStats(response);
+        }).catch(function (error) {
+            console.error(error);
+        });
+    }
+
+    showStats(response){
+        const statsDialog = document.querySelector(".js-stats-dialog");
+        statsDialog.innerHTML = `<h2>${response.data.data[0].game.home_team_score}</h2> - <h2>${response.data.data[0].game.visitor_team_score}</h2>`;
+        statsDialog.showModal();
+    }
 }
 
 new Teams();
